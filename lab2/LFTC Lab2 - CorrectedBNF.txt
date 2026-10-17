@@ -1,0 +1,111 @@
+######################  Lexical Rules  ######################################
+
+_Letters and Digits__________________________________________________________
+
+<letter> ::= a | b | c | d | e | f | g | h | i | j | k | l | m
+           | n | o | p | q | r | s | t | u | v | w | x | y | z
+           | A | B | C | D | E | F | G | H | I | J | K | L | M
+           | N | O | P | Q | R | S | T | U | V | W | X | Y | Z
+
+<nonzero-digit> ::= 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+
+<digit> ::= 0 | <nonzero-digit>
+
+_Identifiers____________________________________________________________
+
+<identifier> ::= <letter> <identifier-tail>
+
+<identifier-tail> ::= <letter> <identifier-tail>
+                    | <digit> <identifier-tail>
+                    | _ <identifier-tail>
+                    | ε
+
+
+_Integer Constants__________________________________________________________
+
+
+<integer-constant> ::= 0 | <positive-integer>
+
+<positive-integer> ::= <nonzero-digit> <digits>
+
+<digits> ::= <digit> <digits> | ε
+
+######################  Syntactic Rules  ######################################
+
+_Declarations, References and Assignment ___________________________________
+
+<declaration> ::= int <identifier> ; 
+				| int <identifier> = <expression> ; 
+				| int <identifier> [ <expression> ] ;
+
+<reference> ::= <identifier> 
+				| <identifier> [ <expression> ]
+
+<assignment> ::= <reference> = <expression> ;
+
+
+_Arithmetic Expressions______________________________________________________
+
+<expression> ::= <expression> + <term>
+               | <expression> - <term>
+               | <term>
+
+# NOTE: operators with priority:
+<term> ::= <term> * <factor>
+         | <term> / <factor>
+         | <term> % <factor>
+         | <factor>
+
+<factor> ::= <integer-constant>
+           | <reference>
+           | ( <expression> )
+           | - <factor>
+
+
+_Conditions___________________________________________________________
+<comparison-operator> ::= == | != | < | <= | > | >=
+
+<condition> ::= <expression> <comparison-operator> <expression>
+              		| <expression> in <identifier>
+              		| <expression> between ( <expression> , <expression> )
+             		| <identifier> is unique
+			| not ( <condition> )  
+
+_Conditional Statements___________________________________________________
+
+<conditional> ::= if ( <condition> ) 
+					<block> 
+				<else-part>
+
+<else-part> ::= else <block> | ε
+
+_Loops_________________________________________________________________
+
+<loop> ::= while ( <condition> ) 
+				<block>
+
+_Input and Output________________________________________________________
+
+<input> ::= read( <reference> ) ;
+
+<output> ::= print( <expression> ) ;
+
+
+_Statements and Blocks____________________________________________________
+
+<statement> ::= <assignment>
+            		| <input>
+              		| <output>
+              		| <conditional>
+             		| <loop>
+
+<statements> ::= <statement> <statements> | ε
+
+<block> ::= { <statements> }
+
+
+_Program Structure__________________________________________________
+
+<declarations> ::= <declaration> <declarations> | ε
+
+<program> ::= <declarations> <statements>
