@@ -1,0 +1,3 @@
+int quantity;
+quantity = 12;
+print(quantity);

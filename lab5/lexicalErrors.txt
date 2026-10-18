@@ -1,0 +1,4 @@
+int quantity;
+quantity = 012;
+quantity = 12abc;
+quantity = @;

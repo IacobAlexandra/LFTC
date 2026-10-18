@@ -1,0 +1,11 @@
+int quantity;
+
+read(quantity);
+
+if (quantity between (0, 100)) {
+    print(quantity);
+}
+else {
+    quantity = 0;
+    print(quantity);
+}
