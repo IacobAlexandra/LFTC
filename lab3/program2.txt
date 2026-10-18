@@ -1,0 +1,43 @@
+int quantities[5];
+int i;
+int average;
+int countInInterval;
+int start;
+int end;
+
+countInInterval = 0;
+average = 0;
+i = 0;
+
+read(start);
+while ( start < 0){
+	read(start);
+}
+
+read(end);
+while (end < start){
+	read(end);
+}
+
+while (i < 5) {
+    read(quantities[i]);
+
+    while (quantities[i] < 0) {
+        read(quantities[i]);
+    }
+
+    if (quantities[i] between (start, end)) {
+        average = average + quantities[i];
+        countInInterval = countInInterval + 1;
+    }
+
+    i = i + 1;
+}
+
+if (countInInterval > 0){
+	average = average / countInInterval;
+	print(average);
+}
+else{
+	print(0);
+}
